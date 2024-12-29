@@ -1,0 +1,185 @@
+.edit-listings {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  .stats {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0;
+
+    .stat-item {
+      text-align: center;
+
+      .stat-circle {
+        position: relative;
+        width: 100px;
+        height: 100px;
+
+        svg {
+          width: 100%;
+          height: 100%;
+          transform: rotate(-90deg);
+
+          .circle-bg {
+            fill: none;
+            stroke: #e6e6e6;
+            stroke-width: 3.8;
+          }
+
+          .circle {
+            fill: none;
+            stroke-width: 3.8;
+            stroke-linecap: round;
+            stroke: transparent;
+            transition: stroke 0.3s ease, stroke-dasharray 0.3s ease;
+          }
+
+          &.green .circle {
+            stroke: #4caf50;
+          }
+
+          &.blue .circle {
+            stroke: #2196f3;
+          }
+
+          &.red .circle {
+            stroke: #f44336;
+          }
+        }
+      }
+
+      h2 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        font-size: 24px;
+        color: #333;
+      }
+
+      p {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #555;
+      }
+    }
+  }
+
+  .listings-title {
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    color: #2c3e50;
+    text-align: center;
+    margin: 3rem;
+  }
+
+  .listings {
+    list-style: none;
+    padding: 0;
+
+    .listing-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .car-image {
+        width: 140px;
+        height: 100px;
+        flex-shrink: 0;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 8px;
+          border: 1px solid #ddd;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      .car-info {
+        flex-grow: 1;
+        margin-left: 1.5rem;
+
+        .car-title {
+          font-size: 1.8rem;
+          font-weight: 600;
+          color: #2c3e50;
+          letter-spacing: 0.8px;
+          text-transform: capitalize;
+        }
+
+        .divider {
+          width: 30%;
+          height: 1px;
+          background: #e0e0e0;
+          margin: 1rem 0;
+        }
+
+        .car-details {
+          display: flex;
+          gap: 1.5rem;
+          justify-content: flex-start;
+
+          span {
+            font-size: 1.1rem;
+            color: #34495e;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            i {
+              color: #ff9800;
+            }
+          }
+        }
+      }
+
+      .car-actions {
+        display: flex;
+        align-items: center;
+
+        .edit-btn {
+          padding: 0.75rem 1.5rem;
+          font-size: 1rem;
+          font-weight: bold;
+          letter-spacing: 0.5px;
+          color: #ffffff;
+          background: linear-gradient(90deg, #ff9800, #e67e22);
+          border: none;
+          border-radius: 50px;
+          cursor: pointer;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+          transition: background 0.3s ease, transform 0.2s ease;
+
+          i {
+            margin-right: 0.3rem;
+          }
+
+          &:hover {
+            background: linear-gradient(90deg, #e67e22, #d35400);
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+  }
+}

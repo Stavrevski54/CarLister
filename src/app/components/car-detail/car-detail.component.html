@@ -1,0 +1,284 @@
+<nav class="breadcrumb">
+  <a routerLink="/">Home</a>
+  <span class="separator">&gt;</span>
+  <a routerLink="/cars">Cars</a>
+  <span class="separator">&gt;</span>
+  <span>{{ car.make }} {{ car.model }}</span>
+</nav>
+
+<div *ngIf="car as carDetails" class="car-details">
+  <section class="hero-section">
+    <div class="hero-content">
+      <img
+        [src]="car?.image"
+        alt="{{ car?.make }} {{ car?.model }}"
+        class="hero-image"
+        (error)="handleImageError($event)"
+      />
+      <div class="hero-overlay">
+        <h1 class="hero-title">{{ car?.make }} {{ car?.model }}</h1>
+        <p class="hero-subtitle">{{ heroSubtitle }} - {{ car?.year }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="details-section">
+    <div class="details-wrapper">
+      <div class="top-row">
+        <div class="details-card">
+          <i class="fas fa-calendar-alt"></i>
+          <h3>Year</h3>
+          <p>{{ car?.year }}</p>
+        </div>
+        <div class="details-card">
+          <i class="fas fa-tachometer-alt"></i>
+          <h3>Mileage</h3>
+          <p>
+            {{
+              car?.mileage !== null && car?.mileage !== undefined
+                ? car.mileage + " km"
+                : "0 km"
+            }}
+          </p>
+        </div>
+        <div class="details-card">
+          <i class="fas fa-gas-pump"></i>
+          <h3>Fuel Type</h3>
+          <p>{{ car?.fuel || "N/A" }}</p>
+        </div>
+        <div class="details-card">
+          <i class="fas fa-cogs"></i>
+          <h3>Transmission</h3>
+          <p>{{ car?.transmission || "N/A" }}</p>
+        </div>
+        <div class="details-card">
+          <i class="fas fa-tag"></i>
+          <h3>Condition</h3>
+          <p>{{ car?.condition }}</p>
+        </div>
+      </div>
+
+      <div class="second-row">
+        <div class="features-card">
+          <div class="icon-wrapper">
+            <i class="fas fa-star"></i>
+          </div>
+          <h3>Features</h3>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> Heated Seats</li>
+            <li><i class="fas fa-check-circle"></i> Apple CarPlay</li>
+            <li><i class="fas fa-check-circle"></i> Advanced Safety</li>
+          </ul>
+        </div>
+
+        <div class="ratings-card">
+          <i class="fas fa-users"></i>
+          <h3>Car Rating</h3>
+          <div class="rating-info">
+            <strong class="rating-score">4.5</strong>
+            <span class="rating-divider">/</span>
+            <span class="rating-max">5</span>
+            <span class="review-count">(150 Reviews)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="price-container">
+        <div *ngIf="car?.discount" class="discount-badge">
+          -{{ car?.discount }}%
+        </div>
+        <div class="price">
+          <h2 class="current-price">
+            ${{ discountedPrice || car?.price | number : "1.0-0" }}
+          </h2>
+          <span *ngIf="car?.discount" class="original-price">
+            ${{ car?.price | number : "1.0-0" }}
+          </span>
+          <span class="monthly-payment">
+            Est. ${{
+              (discountedPrice || car?.price) / 60 | number : "1.0-0"
+            }}/mo
+          </span>
+        </div>
+        <p class="vat-info">
+          <i class="fas fa-info-circle vat-icon"></i>
+          Includes VAT (18%):
+          <span class="vat-amount">
+            ${{ (discountedPrice || car?.price) * 0.18 | number : "1.0-0" }}
+          </span>
+        </p>
+
+        <button class="btn-primary" (click)="showModal = true">
+          <i class="fas fa-phone-alt ringing-icon"></i> Contact Seller
+        </button>
+        <app-contact-modal
+          *ngIf="showModal"
+          (close)="showModal = false"
+        ></app-contact-modal>
+      </div>
+    </div>
+  </section>
+
+  <section class="further-details">
+    <div class="section-header">
+      <h3 class="main-title">
+        <span class="decorative-line"></span>
+        A Closer Look
+        <span class="decorative-line"></span>
+      </h3>
+      <p class="section-subtitle">
+        Explore key details and specifications that make this car stand out.
+      </p>
+    </div>
+
+    <table>
+      <tbody>
+        <tr>
+          <th>Engine</th>
+          <td>{{ car.engine }}</td>
+        </tr>
+        <tr>
+          <th>Horsepower</th>
+          <td>{{ car.horsepower }} hp</td>
+        </tr>
+        <tr>
+          <th>Category</th>
+          <td>{{ car.category }}</td>
+        </tr>
+        <tr>
+          <th>Drivetrain</th>
+          <td>{{ car.drivetrain }}</td>
+        </tr>
+        <tr>
+          <th>Seating</th>
+          <td>{{ car.seating }} seats</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="financing-options">
+    <div class="section-header">
+      <h3 class="main-title">
+        <span class="decorative-line"></span>
+        Flexible Financing Plans
+        <span class="decorative-line"></span>
+      </h3>
+      <p class="section-subtitle">
+        Unlock the flexibility you need to drive your dream car.
+      </p>
+    </div>
+
+    <div class="financing-cards">
+      <div class="financing-card standard">
+        <h4 class="plan-title">Standard Plan</h4>
+        <p class="plan-tagline">Reliable and affordable long-term financing.</p>
+        <hr class="divider" />
+        <div class="financing-plan">
+          <p class="monthly-payment">
+            <span class="amount">${{ car.price / 60 | number : "1.0-0" }}</span>
+            <span class="per-month">/mo</span>
+          </p>
+          <p class="payment-details">Includes taxes and fees</p>
+        </div>
+
+        <ul class="features">
+          <li><span class="icon">✔</span>60-month plan</li>
+          <li><span class="icon">✔</span>Low-interest rate</li>
+          <li><span class="icon">✔</span>No prepayment penalty</li>
+          <li><span class="icon">✔</span>Simple application process</li>
+        </ul>
+
+        <button class="btn-secondary">Learn More</button>
+      </div>
+
+      <div class="financing-card premium">
+        <span class="ribbon">Most Popular</span>
+        <h4 class="plan-title">Premium Plan</h4>
+        <p class="plan-tagline">
+          Best value with exclusive perks and benefits.
+        </p>
+        <hr class="divider" />
+        <div class="financing-plan">
+          <div class="pricing-pill">
+            <p class="monthly-payment">
+              <span class="amount"
+                >${{ car.price / 48 | number : "1.0-0" }}</span
+              >
+              <span class="per-month">/mo</span>
+            </p>
+            <p class="payment-details">Includes taxes and fees</p>
+          </div>
+        </div>
+
+        <ul class="features">
+          <li><span class="icon">✔</span>48-month plan</li>
+          <li><span class="icon">✔</span>Priority approval process</li>
+          <li><span class="icon">✔</span>Flexible repayment terms</li>
+          <li><span class="icon">✔</span>Access to exclusive promotions</li>
+        </ul>
+        <button class="btn-primary">Get Started</button>
+      </div>
+
+      <div class="financing-card custom">
+        <h4 class="plan-title">Custom Plan</h4>
+        <p class="plan-tagline">Tailored financing solutions for your needs.</p>
+        <hr class="divider" />
+        <p class="monthly-payment">
+          Let's Build Your <br />
+          <span class="highlight">Custom Financing</span>
+        </p>
+
+        <ul class="features">
+          <li><span class="icon">✔</span>Personalized repayment</li>
+          <li><span class="icon">✔</span>Flexible monthly payments</li>
+          <li><span class="icon">✔</span>Special offers for uniquness</li>
+          <li><span class="icon">✔</span>Consult with our experts</li>
+        </ul>
+        <button class="btn-secondary">Contact Us</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="related-listings">
+    <h3>
+      Explore Our Elite Collection
+      <span>Unmatched Luxury. Unparalleled Performance.</span>
+    </h3>
+
+    <div *ngIf="relatedCars$ | async as relatedCars; else noRelated">
+      <div class="related-cards">
+        <div *ngFor="let car of relatedCars" class="related-card">
+          <div class="image-container">
+            <img
+              [src]="
+                car.image || 'https://via.placeholder.com/300x200?text=No+Image'
+              "
+              alt="{{ car.make }} {{ car.model }}"
+            />
+            <div class="year-pill">
+              <i class="fas fa-calendar-alt"></i> {{ car.year }}
+            </div>
+          </div>
+          <div class="card-content">
+            <p class="make">{{ car.make }}</p>
+            <h4 class="model">{{ car.model }}</h4>
+            <div class="price-container">
+              <hr class="line" />
+              <p class="price">
+                <span class="label">Price:</span>
+                <span class="amount">${{ car.price.toLocaleString() }}</span>
+              </p>
+            </div>
+            <button [routerLink]="['/cars', car.id]" class="btn-view">
+              View Details
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noRelated>
+      <p class="no-related-message">No related cars available at the moment.</p>
+    </ng-template>
+  </div>
+</div>

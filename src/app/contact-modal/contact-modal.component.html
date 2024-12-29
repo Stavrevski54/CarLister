@@ -1,0 +1,94 @@
+<div class="contact-modal-overlay" (click)="closeModal()"></div>
+<div class="contact-modal">
+  <div class="modal-header">
+    <div class="header-content">
+      <h2>Get in Touch</h2>
+      <p class="subtitle">
+        We’re here to help you connect with the best vehicles.
+      </p>
+    </div>
+    <button class="close-btn" (click)="closeModal()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div class="seller-info">
+    <div class="left-section">
+      <div class="avatar">
+        <i class="fas fa-user-circle"></i>
+      </div>
+      <h3 class="seller-name">Luxury Motors</h3>
+      <div class="verification">
+        <span class="badge">
+          <i class="fas fa-check"></i>
+        </span>
+        <span class="verified-text">Verified Dealer</span>
+      </div>
+    </div>
+
+    <div class="right-section">
+      <div class="seller-info-description">
+        <h4>About the Seller</h4>
+        <p class="description">
+          Luxury Motors is your trusted source for premium vehicles, with over
+          10 years of expertise in delivering exceptional service.
+        </p>
+      </div>
+
+      <div class="highlights-section">
+        <button
+          class="toggle-highlights-btn"
+          (click)="showHighlights = !showHighlights"
+        >
+          <i
+            [class]="
+              showHighlights ? 'fas fa-chevron-up' : 'fas fa-chevron-down'
+            "
+          ></i>
+          More About the Seller
+        </button>
+        <div class="highlights" *ngIf="showHighlights">
+          <div class="highlights">
+            <div class="highlight">
+              <i class="fas fa-check-circle"></i>
+              <span>5,000+ Customers</span>
+            </div>
+            <div class="highlight">
+              <i class="fas fa-star"></i>
+              <span>4.8/5 Rating</span>
+            </div>
+            <div class="highlight">
+              <i class="fas fa-award"></i>
+              <span>Certified Dealer</span>
+            </div>
+            <div class="highlight">
+              <i class="fas fa-shield-alt"></i>
+              <span>100% Guarantee</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-options">
+    <button class="contact-option" (click)="emailSeller()">
+      <div class="icon">
+        <i class="fas fa-envelope"></i>
+      </div>
+      <div class="content">
+        <h4>Email Seller</h4>
+        <p>Send an email inquiry.</p>
+      </div>
+    </button>
+    <button class="contact-option" (click)="callSeller()">
+      <div class="icon">
+        <i class="fas fa-phone-alt"></i>
+      </div>
+      <div class="content">
+        <h4>Call Seller</h4>
+        <p>Speak with the seller.</p>
+      </div>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,212 @@
+<div class="home">
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Your Dream Car Awaits</h1>
+      <p>
+        Browse through our extensive collection of cars or list your own for
+        sale!
+      </p>
+      <div class="cta-buttons">
+        <a routerLink="/cars" class="btn primary">View Listings</a>
+        <a routerLink="/add-car" class="btn secondary">List Your Car</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="search">
+    <input
+      type="text"
+      placeholder="Search for cars by make, model, or year..."
+      class="search-bar"
+      [(ngModel)]="searchQuery"
+      (keyup.enter)="onSearch()"
+    />
+    <button class="search-btn" (click)="onSearch()">
+      <i class="fas fa-magnifying-glass"></i> Search
+    </button>
+  </section>
+
+  <section class="features">
+    <div class="features-wrapper">
+      <h2>Why Choose Us?</h2>
+      <div class="features-grid">
+        <div class="feature-block">
+          <div class="icon-wrapper">
+            <i class="fas fa-car"></i>
+          </div>
+          <div class="content">
+            <h3>Wide Selection</h3>
+            <p>
+              Access a wide variety of vehicles from trusted dealers and
+              individuals, offering everything from economy to luxury cars.
+            </p>
+          </div>
+          <div class="border-highlight"></div>
+        </div>
+
+        <div class="feature-block">
+          <div class="icon-wrapper">
+            <i class="fas fa-user-check"></i>
+          </div>
+          <div class="content">
+            <h3>Easy to Use</h3>
+            <p>
+              Browse and filter with ease. Our platform simplifies every step of
+              the car buying or selling journey.
+            </p>
+          </div>
+          <div class="border-highlight"></div>
+        </div>
+
+        <div class="feature-block">
+          <div class="icon-wrapper">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div class="content">
+            <h3>Secure Transactions</h3>
+            <p>
+              Enjoy complete peace of mind with our platform's robust security
+              measures for safe and hassle-free transactions.
+            </p>
+          </div>
+          <div class="border-highlight"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="learn-more">
+    <div class="learn-more-content">
+      <h2>Want to Know More About Us?</h2>
+      <p>
+        Discover who we are, our mission, and what makes CarLister the preferred
+        platform for car enthusiasts and sellers alike.
+      </p>
+      <button routerLink="/about" class="btn learn-more-btn">Learn More</button>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <h2>What Our Users Say</h2>
+    <div class="testimonial-cards">
+      <div class="testimonial-card">
+        <div class="testimonial-header">
+          <img src="https://i.imgur.com/j9PSwjx.jpeg" alt="Stefan" />
+          <h4>Stefan</h4>
+        </div>
+        <p>
+          "I found the perfect car for my family in just a few clicks. CarLister
+          saved me so much time!"
+        </p>
+        <div class="rating">★★★★☆</div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-header">
+          <img src="https://i.imgur.com/j9PSwjx.jpeg" alt="Petar" />
+          <h4>Petar</h4>
+        </div>
+        <p>
+          "Selling my car was such a breeze. The interface was easy to use, and
+          I got a buyer within a week!"
+        </p>
+        <div class="rating">★★★★★</div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-header">
+          <img src="https://i.imgur.com/j9PSwjx.jpeg" alt="Kosta" />
+          <h4>Kosta</h4>
+        </div>
+        <p>
+          "As a dealer, CarLister has been invaluable. I’ve connected with so
+          many customers in no time!"
+        </p>
+        <div class="rating">★★★★☆</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="highlights" #highlightsSection>
+    <div class="highlight-stats">
+      <div class="stat-item">
+        <div class="icon-circle">
+          <i class="fas fa-car"></i>
+        </div>
+        <div class="stat-text">
+          <h3><span class="counter" data-target="5000">0</span>+</h3>
+          <p>Cars Listed</p>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="icon-circle">
+          <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-text">
+          <h3><span class="counter" data-target="1500">0</span>+</h3>
+          <p>Satisfied Customers</p>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="icon-circle">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <div class="stat-text">
+          <h3><span class="counter" data-target="100">0</span>%</h3>
+          <p>Secure Transactions</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="journey-timeline">
+    <div class="content-wrapper">
+      <h2>Your Journey to Buying Your Dream Car</h2>
+      <p class="subtitle">
+        Let us guide you through a fun and simple process to find your perfect
+        car!
+      </p>
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="shape shape-start">
+            <i class="fas fa-search"></i>
+          </div>
+          <h3>Search</h3>
+          <p>Browse listings to find your dream car.</p>
+        </div>
+        <div class="path">➔</div>
+        <div class="timeline-step">
+          <div class="shape">
+            <i class="fas fa-car"></i>
+          </div>
+          <h3>Explore</h3>
+          <p>Check details to find your perfect match.</p>
+        </div>
+        <div class="path">➔</div>
+        <div class="timeline-step">
+          <div class="shape">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <h3>Contact</h3>
+          <p>Contact the seller directly and easily to talk directly.</p>
+        </div>
+        <div class="path">➔</div>
+        <div class="timeline-step">
+          <div class="shape">
+            <i class="fas fa-file-contract"></i>
+          </div>
+          <h3>Negotiate</h3>
+          <p>Finalize the deal and get ready to drive.</p>
+        </div>
+        <div class="path">➔</div>
+        <div class="timeline-step">
+          <div class="shape shape-end">
+            <i class="fas fa-key"></i>
+          </div>
+          <h3>Drive</h3>
+          <p>Complete your journey and drive away!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

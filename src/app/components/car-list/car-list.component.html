@@ -1,0 +1,168 @@
+<div class="filter-section">
+  <div class="filter-header">
+    <h2>Find Your Perfect Car</h2>
+    <p>Apply filters below to narrow your search for the best matches.</p>
+  </div>
+
+  <form (ngSubmit)="filterCars()" class="filter-form">
+    <div class="filter-group">
+      <input
+        id="make"
+        type="text"
+        [(ngModel)]="filter.make"
+        name="make"
+        placeholder=" "
+      />
+      <label for="make"><i class="fas fa-car"></i> Make</label>
+    </div>
+    <div class="filter-group">
+      <input
+        id="model"
+        type="text"
+        [(ngModel)]="filter.model"
+        name="model"
+        placeholder=" "
+      />
+      <label for="model"><i class="fas fa-tags"></i> Model</label>
+    </div>
+    <div class="filter-group">
+      <select id="year" [(ngModel)]="filter.year" name="year">
+        <option value="">Any</option>
+        <option *ngFor="let year of yearOptions" [value]="year">
+          {{ year }}
+        </option>
+      </select>
+      <label for="year"><i class="fas fa-calendar-alt"></i> Year</label>
+    </div>
+    <div class="filter-group">
+      <input
+        id="price"
+        type="number"
+        [(ngModel)]="filter.price"
+        name="price"
+        placeholder=" "
+      />
+      <label for="price"><i class="fas fa-dollar-sign"></i> Max Price</label>
+    </div>
+    <div class="filter-group">
+      <select id="condition" [(ngModel)]="filter.condition" name="condition">
+        <option value="">Any</option>
+        <option value="New">New</option>
+        <option value="Used">Used</option>
+      </select>
+      <label for="condition"><i class="fas fa-tools"></i> Condition</label>
+    </div>
+    <div class="filter-actions">
+      <button type="submit" class="btn filter-btn">
+        <i class="fas fa-filter"></i> Apply Filters
+      </button>
+      <button
+        type="button"
+        class="btn clear-filters-btn"
+        (click)="clearFilters()"
+      >
+        <i class="fas fa-times-circle"></i> Clear Filters
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="car-list">
+  <div *ngFor="let car of paginatedCars" class="car-card">
+    <div class="image-container">
+      <img
+        [src]="car.image"
+        alt="{{ car.make }} {{ car.model }}"
+        (error)="handleImageError($event)"
+      />
+
+      <div class="gradient-overlay"></div>
+      <div
+        class="condition"
+        [ngClass]="{
+          new: car.condition === 'New',
+          used: car.condition === 'Used',
+          certified: car.condition === 'Certified'
+        }"
+      >
+        {{ car.condition }}
+      </div>
+
+      <div *ngIf="car.discount" class="badge">-{{ car.discount }}%</div>
+    </div>
+    <div class="content">
+      <div class="title">
+        <div class="make">{{ car.make }}</div>
+        <div class="model">{{ car.model }}</div>
+      </div>
+
+      <div class="details">
+        <div class="detail">
+          <i class="fas fa-calendar-alt"></i>
+          <div class="text">
+            <span class="label">Year</span>
+            <span class="value">{{ car.year }}</span>
+          </div>
+        </div>
+        <div class="detail">
+          <i class="fas fa-tachometer-alt"></i>
+          <div class="text">
+            <span class="label">Mileage</span>
+            <span class="value">{{
+              car.mileage > 0 ? car.mileage + " km" : "New"
+            }}</span>
+          </div>
+        </div>
+        <div class="detail">
+          <i class="fas fa-gas-pump"></i>
+          <div class="text">
+            <span class="label">Fuel</span>
+            <span class="value">{{ car.fuel || "N/A" }}</span>
+          </div>
+        </div>
+        <div class="detail">
+          <i class="fas fa-cogs"></i>
+          <div class="text">
+            <span class="label">Gearbox</span>
+            <span class="value">{{ car.transmission || "N/A" }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="price" [class.has-discount]="car.discount">
+        <span class="amount">{{ car.price | currency : "USD" }}</span>
+        <span class="monthly-payment">
+          Est. ${{ (car.price / 60).toFixed(0) }}/mo
+        </span>
+      </div>
+
+      <button [routerLink]="['/cars', car.id]" class="details-btn">
+        View Details
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="pagination">
+  <button
+    [disabled]="currentPage === 1"
+    (click)="changePage(currentPage - 1)"
+    class="prev-btn"
+  >
+    &laquo; Previous
+  </button>
+  <button
+    *ngFor="let page of [].constructor(totalPages); let i = index"
+    (click)="changePage(i + 1)"
+    [class.active]="currentPage === i + 1"
+  >
+    {{ i + 1 }}
+  </button>
+  <button
+    [disabled]="currentPage === totalPages"
+    (click)="changePage(currentPage + 1)"
+    class="next-btn"
+  >
+    Next &raquo;
+  </button>
+</div>

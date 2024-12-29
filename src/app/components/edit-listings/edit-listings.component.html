@@ -1,0 +1,91 @@
+<div class="edit-listings">
+  <section class="stats" *ngIf="!isLoading">
+    <div class="stat-item">
+      <div class="stat-circle">
+        <svg viewBox="0 0 36 36" class="circular-chart green">
+          <path
+            class="circle-bg"
+            d="M18 2.0845
+               a 15.9155 15.9155 0 0 1 0 31.831
+               a 15.9155 15.9155 0 0 1 0 -31.831"
+          />
+          <path
+            class="circle"
+            [attr.stroke-dasharray]="totalListings + ', 100'"
+            d="M18 2.0845
+               a 15.9155 15.9155 0 0 1 0 31.831
+               a 15.9155 15.9155 0 0 1 0 -31.831"
+          />
+        </svg>
+        <h2>{{ totalListings }}</h2>
+      </div>
+      <p>Total Listings</p>
+    </div>
+    <div class="stat-item">
+      <div class="stat-circle">
+        <svg viewBox="0 0 36 36" class="circular-chart blue">
+          <path
+            class="circle-bg"
+            d="M18 2.0845
+               a 15.9155 15.9155 0 0 1 0 31.831
+               a 15.9155 15.9155 0 0 1 0 -31.831"
+          />
+          <path
+            class="circle"
+            [attr.stroke-dasharray]="liveListings + ', 100'"
+            d="M18 2.0845
+               a 15.9155 15.9155 0 0 1 0 31.831
+               a 15.9155 15.9155 0 0 1 0 -31.831"
+          />
+        </svg>
+        <h2>{{ liveListings }}</h2>
+      </div>
+      <p>Live Listings</p>
+    </div>
+    <div class="stat-item">
+      <div class="stat-circle">
+        <svg viewBox="0 0 36 36" class="circular-chart red">
+          <path
+            class="circle-bg"
+            d="M18 2.0845
+               a 15.9155 15.9155 0 0 1 0 31.831
+               a 15.9155 15.9155 0 0 1 0 -31.831"
+          />
+          <path
+            class="circle"
+            [attr.stroke-dasharray]="draftListings + ', 100'"
+            d="M18 2.0845
+               a 15.9155 15.9155 0 0 1 0 31.831
+               a 15.9155 15.9155 0 0 1 0 -31.831"
+          />
+        </svg>
+        <h2>{{ draftListings }}</h2>
+      </div>
+      <p>Draft Listings</p>
+    </div>
+  </section>
+
+  <h1 class="listings-title">Your Listings</h1>
+  <ul class="listings">
+    <li *ngFor="let car of listings" class="listing-item">
+      <div class="car-image">
+        <img [src]="car.image" alt="{{ car.make }} {{ car.model }}" />
+      </div>
+      <div class="car-info">
+        <h3 class="car-title">{{ car.make }} {{ car.model }}</h3>
+        <div class="divider"></div>
+        <div class="car-details">
+          <span><i class="fas fa-calendar-alt"></i> {{ car.year }}</span>
+          <span><i class="fas fa-tag"></i> ${{ car.price }}</span>
+          <span><i class="fas fa-road"></i> {{ car.mileage }} km</span>
+        </div>
+      </div>
+
+      <div class="car-actions">
+        <button class="edit-btn" (click)="editListing(car.id)">
+          <i class="fas fa-edit"></i> Edit
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,170 @@
+<div class="about">
+  <section class="hero">
+    <h1>Welcome to CarLister</h1>
+    <p>
+      Your go-to platform for discovering and listing vehicles with ease,
+      efficiency, and trust.
+    </p>
+    <button class="cta-btn" routerLink="/cars">Start Exploring</button>
+  </section>
+
+  <section class="features">
+    <h2>What Makes Us Unique</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="icon">
+          <i class="fas fa-car" aria-hidden="true"></i>
+        </div>
+        <h3>Seamless Navigation</h3>
+        <p>Easily browse, search, and filter cars tailored to your needs.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">
+          <i class="fas fa-tools" aria-hidden="true"></i>
+        </div>
+        <h3>Powerful Features</h3>
+        <p>Advanced tools for a smarter car buying and selling experience.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">
+          <i class="fas fa-shield-alt" aria-hidden="true"></i>
+        </div>
+        <h3>Safety First</h3>
+        <p>Our platform ensures secure and reliable transactions every time.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq">
+    <h2 class="faq-title"><span>F</span><span>A</span><span>Q</span></h2>
+    <div
+      class="faq-item"
+      *ngFor="let faq of faqs; let i = index"
+      (click)="toggleFaq(i)"
+      [class.active]="activeFaq === i"
+    >
+      <div class="faq-question">
+        <h3>{{ faq.question }}</h3>
+        <span class="toggle-icon" [class.open]="activeFaq === i">+</span>
+      </div>
+      <div class="faq-answer" [class.visible]="activeFaq === i">
+        <p>{{ faq.answer }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="divider"></section>
+
+  <section class="mission">
+    <div class="mission-timeline">
+      <div class="timeline-item">
+        <div class="timeline-circle">2024</div>
+        <div class="timeline-content">
+          <h3>The Beginning</h3>
+          <p>
+            CarLister was founded to redefine the way people connect with
+            vehicles. From an idea to a trusted platform, our mission has always
+            been about empowering users with simplicity and transparency.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-circle">2025</div>
+        <div class="timeline-content">
+          <h3>Innovation Takes Hold</h3>
+          <p>
+            By embracing technology, we launched tools that made vehicle listing
+            faster, smarter, and more accessible for everyone.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-circle">2026</div>
+        <div class="timeline-content">
+          <h3>Trust at the Core</h3>
+          <p>
+            Our platform became a standard for secure and reliable transactions,
+            earning the trust of users worldwide.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item future">
+        <div class="timeline-circle">Future</div>
+        <div class="timeline-content">
+          <h3>Shaping the Road Ahead</h3>
+          <p>
+            CarLister continues to evolve with innovation and user-centric
+            design. The future holds exciting advancements, driven by trust and
+            excellence.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="divider"></section>
+
+  <section class="contact">
+    <h2>Contact Us</h2>
+    <p>
+      If you have any questions or need assistance, feel free to reach out to
+      us.
+    </p>
+    <div class="contact-info">
+      <p>
+        Email:
+        <a href="mailto:support&#64;carlister.com">support&#64;carlister.com</a>
+      </p>
+      <p>Phone: <a href="tel:+18001234567">+1-800-123-4567</a></p>
+    </div>
+    <form (submit)="submitForm($event)">
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input
+          id="name"
+          type="text"
+          placeholder="Your Name"
+          required
+          [(ngModel)]="contactForm.name"
+          name="name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Your Email</label>
+        <input
+          id="email"
+          type="email"
+          placeholder="Your Email"
+          required
+          [(ngModel)]="contactForm.email"
+          name="email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea
+          id="message"
+          rows="4"
+          placeholder="Your Message"
+          [(ngModel)]="contactForm.message"
+          name="message"
+          (input)="checkWordLimit()"
+          [ngClass]="{ 'word-limit-exceeded': isWordLimitExceeded }"
+          required
+        ></textarea>
+        <small
+          class="word-counter"
+          [ngClass]="{ exceeded: isWordLimitExceeded }"
+        >
+          {{ wordCount }}/500 words
+        </small>
+      </div>
+      <button type="submit" [disabled]="isWordLimitExceeded">
+        Send Message
+      </button>
+    </form>
+  </section>
+</div>

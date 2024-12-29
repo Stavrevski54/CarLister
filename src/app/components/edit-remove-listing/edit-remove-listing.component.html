@@ -1,0 +1,232 @@
+<section class="edit-remove-container">
+  <div *ngIf="isLoading" class="loading-state">
+    <p>Loading car details...</p>
+  </div>
+
+  <header class="listing-header">
+    <div class="container">
+      <div class="car-image-wrapper">
+        <img
+          [src]="listing.image || 'https://via.placeholder.com/600x400'"
+          [alt]="listing.make + ' ' + listing.model"
+          class="car-image"
+        />
+      </div>
+
+      <div class="car-info-card">
+        <h1 class="car-title">{{ listing.make }} {{ listing.model }}</h1>
+        <p class="car-meta">
+          <span class="status-tag">Editing Listing</span>
+          {{ listing.year }} | ${{ listing.price }}
+        </p>
+        <ul class="car-details-list">
+          <li><i class="fas fa-road"></i> {{ listing.mileage }} km</li>
+          <li><i class="fas fa-gas-pump"></i> {{ listing.fuel }}</li>
+          <li><i class="fas fa-cogs"></i> {{ listing.transmission }}</li>
+          <li><i class="fas fa-horse"></i> {{ listing.horsepower }} HP</li>
+        </ul>
+        <p class="welcome-message">
+          Hi Stefan, manage your
+          <span class="highlight">{{ listing.make }} {{ listing.model }}</span>
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <div class="card edit-card">
+    <h2 class="card-title"><i class="fas fa-edit"></i> Edit Listing</h2>
+    <form class="edit-form" (ngSubmit)="onSaveChanges()">
+      <fieldset>
+        <legend>Basic Information</legend>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="make">Make</label>
+            <input
+              id="make"
+              type="text"
+              placeholder="e.g., Toyota"
+              [(ngModel)]="listing.make"
+              name="make"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="model">Model</label>
+            <input
+              id="model"
+              type="text"
+              placeholder="e.g., Corolla"
+              [(ngModel)]="listing.model"
+              name="model"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <input
+              id="category"
+              type="text"
+              placeholder="e.g., Sedan"
+              [(ngModel)]="listing.category"
+              name="category"
+            />
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Pricing and Condition</legend>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="price">Price ($)</label>
+            <input
+              id="price"
+              type="number"
+              placeholder="e.g., 20000"
+              [(ngModel)]="listing.price"
+              name="price"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="discount">Discount (%)</label>
+            <input
+              id="discount"
+              type="number"
+              placeholder="e.g., 10"
+              [(ngModel)]="listing.discount"
+              name="discount"
+            />
+          </div>
+          <div class="form-group">
+            <label for="condition">Condition</label>
+            <select
+              id="condition"
+              [(ngModel)]="listing.condition"
+              name="condition"
+            >
+              <option value="New">New</option>
+              <option value="Used">Used</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Specifications</legend>
+        <div class="form-row specifications-row">
+          <div class="form-group">
+            <label for="year">Year</label>
+            <input
+              id="year"
+              type="number"
+              placeholder="e.g., 2020"
+              [(ngModel)]="listing.year"
+              name="year"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="mileage">Mileage (km)</label>
+            <input
+              id="mileage"
+              type="number"
+              placeholder="e.g., 15000"
+              [(ngModel)]="listing.mileage"
+              name="mileage"
+            />
+          </div>
+          <div class="form-group">
+            <label for="fuel">Fuel Type</label>
+            <input
+              id="fuel"
+              type="text"
+              placeholder="e.g., Gasoline"
+              [(ngModel)]="listing.fuel"
+              name="fuel"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="engine">Engine</label>
+            <input
+              id="engine"
+              type="text"
+              placeholder="e.g., 2.5L I4"
+              [(ngModel)]="listing.engine"
+              name="engine"
+            />
+          </div>
+          <div class="form-group">
+            <label for="drivetrain">Drivetrain</label>
+            <input
+              id="drivetrain"
+              type="text"
+              placeholder="e.g., FWD"
+              [(ngModel)]="listing.drivetrain"
+              name="drivetrain"
+            />
+          </div>
+          <div class="form-group">
+            <label for="horsepower">Horsepower (HP)</label>
+            <input
+              id="horsepower"
+              type="number"
+              placeholder="e.g., 203"
+              [(ngModel)]="listing.horsepower"
+              name="horsepower"
+            />
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-save"></i> Save Changes
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="onReset()">
+          <i class="fas fa-undo"></i> Reset
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card remove-card">
+    <h2 class="card-title"><i class="fas fa-trash-alt"></i> Remove Listing</h2>
+    <p class="warning-text">
+      Deleting this listing will remove it permanently. This action cannot be
+      undone.
+    </p>
+    <button class="btn btn-danger" (click)="openRemoveModal()">
+      <i class="fas fa-trash"></i> Remove Listing
+    </button>
+  </div>
+
+  <div class="modal" *ngIf="showModal">
+    <div class="modal-overlay" (click)="closeRemoveModal()"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <i class="fas fa-exclamation-triangle"></i>
+      </div>
+
+      <h2 class="modal-title">Confirm Removal</h2>
+
+      <p class="modal-body">
+        Are you sure you want to permanently delete
+        <strong>{{ listing.make }} {{ listing.model }}</strong
+        >? <br />
+        <span>This action cannot be undone.</span>
+      </p>
+
+      <div class="modal-actions">
+        <button class="btn btn-danger" (click)="onRemoveListing()">
+          <i class="fas fa-check"></i> Yes, Remove
+        </button>
+        <button class="btn btn-secondary" (click)="closeRemoveModal()">
+          <i class="fas fa-times"></i> Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

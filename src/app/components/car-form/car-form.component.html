@@ -1,0 +1,490 @@
+<div class="car-form">
+  <div class="car-form-header">
+    <h2 class="heading">Get Your Car on the Market Today</h2>
+    <p class="subtitle">
+      Share key information about your car to attract potential buyers quickly.
+    </p>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="carForm">
+    <div class="form-sections-container">
+      <fieldset>
+        <legend>Basic Information</legend>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="make">Make</label>
+            <input
+              id="make"
+              type="text"
+              formControlName="make"
+              [ngClass]="{
+                'is-valid':
+                  carForm.get('make')?.valid && carForm.get('make')?.touched,
+                'is-invalid':
+                  carForm.get('make')?.invalid && carForm.get('make')?.touched
+              }"
+              placeholder="e.g., Toyota"
+            />
+            <i
+              *ngIf="carForm.get('make')?.valid && carForm.get('make')?.touched"
+              class="valid-icon fas fa-check-circle"
+            ></i>
+            <i
+              *ngIf="
+                carForm.get('make')?.invalid && carForm.get('make')?.touched
+              "
+              class="invalid-icon fas fa-times-circle"
+            ></i>
+          </div>
+
+          <div class="form-group">
+            <label for="model">Model</label>
+            <input
+              id="model"
+              type="text"
+              formControlName="model"
+              [ngClass]="{
+                'is-valid':
+                  carForm.get('model')?.valid && carForm.get('model')?.touched,
+                'is-invalid':
+                  carForm.get('model')?.invalid && carForm.get('model')?.touched
+              }"
+              placeholder="e.g., Camry"
+            />
+            <i
+              *ngIf="
+                carForm.get('model')?.valid && carForm.get('model')?.touched
+              "
+              class="valid-icon fas fa-check-circle"
+            ></i>
+            <i
+              *ngIf="
+                carForm.get('model')?.invalid && carForm.get('model')?.touched
+              "
+              class="invalid-icon fas fa-times-circle"
+            ></i>
+          </div>
+          <div class="form-group">
+            <label for="year">Year</label>
+            <input
+              id="year"
+              type="number"
+              formControlName="year"
+              [ngClass]="{
+                'is-valid':
+                  carForm.get('year')?.valid && carForm.get('year')?.touched,
+                'is-invalid':
+                  carForm.get('year')?.invalid && carForm.get('year')?.touched
+              }"
+              placeholder="e.g., 2022"
+            />
+            <i
+              *ngIf="carForm.get('year')?.valid && carForm.get('year')?.touched"
+              class="valid-icon fas fa-check-circle"
+            ></i>
+            <i
+              *ngIf="
+                carForm.get('year')?.invalid && carForm.get('year')?.touched
+              "
+              class="invalid-icon fas fa-times-circle"
+            ></i>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Pricing and Condition</legend>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="price">Price ($)</label>
+            <input
+              id="price"
+              type="number"
+              formControlName="price"
+              [ngClass]="{
+                'is-valid':
+                  carForm.get('price')?.valid && carForm.get('price')?.touched,
+                'is-invalid':
+                  carForm.get('price')?.invalid && carForm.get('price')?.touched
+              }"
+              placeholder="e.g., 20000"
+            />
+            <i
+              *ngIf="
+                carForm.get('price')?.valid && carForm.get('price')?.touched
+              "
+              class="valid-icon fas fa-check-circle"
+            ></i>
+            <i
+              *ngIf="
+                carForm.get('price')?.invalid && carForm.get('price')?.touched
+              "
+              class="invalid-icon fas fa-times-circle"
+            ></i>
+          </div>
+          <div class="form-group">
+            <label for="discount">Discount (%)</label>
+            <input
+              id="discount"
+              type="number"
+              formControlName="discount"
+              [ngClass]="{
+                'is-valid':
+                  carForm.get('discount')?.valid &&
+                  carForm.get('discount')?.touched,
+                'is-invalid':
+                  carForm.get('discount')?.invalid &&
+                  carForm.get('discount')?.touched
+              }"
+              placeholder="e.g., 10"
+            />
+            <i
+              *ngIf="
+                carForm.get('discount')?.valid &&
+                carForm.get('discount')?.touched
+              "
+              class="valid-icon fas fa-check-circle"
+            ></i>
+            <i
+              *ngIf="
+                carForm.get('discount')?.invalid &&
+                carForm.get('discount')?.touched
+              "
+              class="invalid-icon fas fa-times-circle"
+            ></i>
+          </div>
+          <div class="form-group">
+            <label for="condition">Condition</label>
+            <select
+              id="condition"
+              formControlName="condition"
+              [ngClass]="{
+                'is-valid':
+                  carForm.get('condition')?.valid &&
+                  carForm.get('condition')?.touched,
+                'is-invalid':
+                  carForm.get('condition')?.invalid &&
+                  carForm.get('condition')?.touched
+              }"
+            >
+              <option value="New">New</option>
+              <option value="Used">Used</option>
+            </select>
+            <i
+              *ngIf="
+                carForm.get('condition')?.valid &&
+                carForm.get('condition')?.touched
+              "
+              class="valid-icon fas fa-check-circle"
+            ></i>
+            <i
+              *ngIf="
+                carForm.get('condition')?.invalid &&
+                carForm.get('condition')?.touched
+              "
+              class="invalid-icon fas fa-times-circle"
+            ></i>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Specifications</legend>
+        <div class="form-row specifications-row">
+          <div class="form-group">
+            <label for="mileage">Mileage (km)</label>
+            <input
+              id="mileage"
+              type="number"
+              formControlName="mileage"
+              [ngClass]="{
+                'is-valid':
+                  carForm.get('mileage')?.valid &&
+                  carForm.get('mileage')?.touched,
+                'is-invalid':
+                  carForm.get('mileage')?.invalid &&
+                  carForm.get('mileage')?.touched
+              }"
+              placeholder="e.g., 15000"
+            />
+            <i
+              *ngIf="
+                carForm.get('mileage')?.valid && carForm.get('mileage')?.touched
+              "
+              class="valid-icon fas fa-check-circle"
+            ></i>
+            <i
+              *ngIf="
+                carForm.get('mileage')?.invalid &&
+                carForm.get('mileage')?.touched
+              "
+              class="invalid-icon fas fa-times-circle"
+            ></i>
+          </div>
+          <div class="form-group">
+            <label for="fuel">Fuel Type</label>
+            <select
+              id="fuel"
+              formControlName="fuel"
+              [ngClass]="{
+                'is-valid':
+                  carForm.get('fuel')?.valid && carForm.get('fuel')?.touched,
+                'is-invalid':
+                  carForm.get('fuel')?.invalid && carForm.get('fuel')?.touched
+              }"
+            >
+              <option value="Gasoline">Gasoline</option>
+              <option value="Diesel">Diesel</option>
+              <option value="Electric">Electric</option>
+              <option value="Hybrid">Hybrid</option>
+            </select>
+            <i
+              *ngIf="carForm.get('fuel')?.valid && carForm.get('fuel')?.touched"
+              class="valid-icon fas fa-check-circle"
+            ></i>
+            <i
+              *ngIf="
+                carForm.get('fuel')?.invalid && carForm.get('fuel')?.touched
+              "
+              class="invalid-icon fas fa-times-circle"
+            ></i>
+          </div>
+          <div class="form-group">
+            <label for="transmission">Transmission</label>
+            <select
+              id="transmission"
+              formControlName="transmission"
+              [ngClass]="{
+                'is-valid':
+                  carForm.get('transmission')?.valid &&
+                  carForm.get('transmission')?.touched,
+                'is-invalid':
+                  carForm.get('transmission')?.invalid &&
+                  carForm.get('transmission')?.touched
+              }"
+            >
+              <option value="Automatic">Automatic</option>
+              <option value="Manual">Manual</option>
+            </select>
+            <i
+              *ngIf="
+                carForm.get('transmission')?.valid &&
+                carForm.get('transmission')?.touched
+              "
+              class="valid-icon fas fa-check-circle"
+            ></i>
+            <i
+              *ngIf="
+                carForm.get('transmission')?.invalid &&
+                carForm.get('transmission')?.touched
+              "
+              class="invalid-icon fas fa-times-circle"
+            ></i>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="engine">Engine</label>
+            <input
+              id="engine"
+              type="text"
+              formControlName="engine"
+              [ngClass]="{
+                'is-valid':
+                  carForm.get('engine')?.valid &&
+                  carForm.get('engine')?.touched,
+                'is-invalid':
+                  carForm.get('engine')?.invalid &&
+                  carForm.get('engine')?.touched
+              }"
+              placeholder="e.g., 2.5L I4"
+            />
+            <i
+              *ngIf="
+                carForm.get('engine')?.valid && carForm.get('engine')?.touched
+              "
+              class="valid-icon fas fa-check-circle"
+            ></i>
+            <i
+              *ngIf="
+                carForm.get('engine')?.invalid && carForm.get('engine')?.touched
+              "
+              class="invalid-icon fas fa-times-circle"
+            ></i>
+          </div>
+          <div class="form-group">
+            <label for="drivetrain">Drivetrain</label>
+            <input
+              id="drivetrain"
+              type="text"
+              formControlName="drivetrain"
+              [ngClass]="{
+                'is-valid':
+                  carForm.get('drivetrain')?.valid &&
+                  carForm.get('drivetrain')?.touched,
+                'is-invalid':
+                  carForm.get('drivetrain')?.invalid &&
+                  carForm.get('drivetrain')?.touched
+              }"
+              placeholder="e.g., FWD"
+            />
+            <i
+              *ngIf="
+                carForm.get('drivetrain')?.valid &&
+                carForm.get('drivetrain')?.touched
+              "
+              class="valid-icon fas fa-check-circle"
+            ></i>
+            <i
+              *ngIf="
+                carForm.get('drivetrain')?.invalid &&
+                carForm.get('drivetrain')?.touched
+              "
+              class="invalid-icon fas fa-times-circle"
+            ></i>
+          </div>
+
+          <div class="form-group">
+            <label for="horsepower">Horsepower</label>
+            <input
+              id="horsepower"
+              type="number"
+              formControlName="horsepower"
+              [ngClass]="{
+                'is-valid':
+                  carForm.get('horsepower')?.valid &&
+                  carForm.get('horsepower')?.touched,
+                'is-invalid':
+                  carForm.get('horsepower')?.invalid &&
+                  carForm.get('horsepower')?.touched
+              }"
+              placeholder="e.g., 203"
+            />
+            <i
+              *ngIf="
+                carForm.get('horsepower')?.valid &&
+                carForm.get('horsepower')?.touched
+              "
+              class="valid-icon fas fa-check-circle"
+            ></i>
+            <i
+              *ngIf="
+                carForm.get('horsepower')?.invalid &&
+                carForm.get('horsepower')?.touched
+              "
+              class="invalid-icon fas fa-times-circle"
+            ></i>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Category and Other Details</legend>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="category">Category</label>
+            <input
+              id="category"
+              type="text"
+              formControlName="category"
+              [ngClass]="{
+                'is-valid':
+                  carForm.get('category')?.valid &&
+                  carForm.get('category')?.touched,
+                'is-invalid':
+                  carForm.get('category')?.invalid &&
+                  carForm.get('category')?.touched
+              }"
+              placeholder="e.g., Sedan"
+            />
+            <i
+              *ngIf="
+                carForm.get('category')?.valid &&
+                carForm.get('category')?.touched
+              "
+              class="valid-icon fas fa-check-circle"
+            ></i>
+            <i
+              *ngIf="
+                carForm.get('category')?.invalid &&
+                carForm.get('category')?.touched
+              "
+              class="invalid-icon fas fa-times-circle"
+            ></i>
+          </div>
+          <div class="form-group">
+            <label for="seating">Seating Capacity</label>
+            <input
+              id="seating"
+              type="number"
+              formControlName="seating"
+              [ngClass]="{
+                'is-valid':
+                  carForm.get('seating')?.valid &&
+                  carForm.get('seating')?.touched,
+                'is-invalid':
+                  carForm.get('seating')?.invalid &&
+                  carForm.get('seating')?.touched
+              }"
+              placeholder="e.g., 5"
+            />
+            <i
+              *ngIf="
+                carForm.get('seating')?.valid && carForm.get('seating')?.touched
+              "
+              class="valid-icon fas fa-check-circle"
+            ></i>
+            <i
+              *ngIf="
+                carForm.get('seating')?.invalid &&
+                carForm.get('seating')?.touched
+              "
+              class="invalid-icon fas fa-times-circle"
+            ></i>
+          </div>
+          <div class="form-group">
+            <label for="image">Upload Image</label>
+            <input
+              type="file"
+              id="image"
+              #fileInput
+              (change)="onFileSelected($event)"
+              accept="image/*"
+              [ngClass]="{
+                'is-valid': imagePreview,
+                'is-invalid': !imagePreview && carForm.get('image')?.touched
+              }"
+            />
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <div *ngIf="imagePreview" class="image-preview">
+      <p>Image Preview:</p>
+      <img [src]="imagePreview" alt="Selected Image" />
+      <div class="remove-image-btn-wrapper">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="onRemoveImage()"
+        >
+          <i class="fas fa-times"></i> Remove Image
+        </button>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button
+        type="submit"
+        [disabled]="carForm.invalid"
+        class="btn btn-primary"
+      >
+        <i class="fas fa-check"></i> Submit
+      </button>
+      <button type="button" (click)="onReset()" class="btn btn-secondary">
+        <i class="fas fa-undo"></i> Reset
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,40 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="logo">
+      <a routerLink="/">CarLister</a>
+    </div>
+    <div
+      class="hamburger-menu"
+      (click)="toggleMenu()"
+      [class.open]="menuActive"
+      aria-label="Toggle navigation"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul [class.active]="menuActive" class="nav-links">
+      <li>
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Home
+        </a>
+      </li>
+      <li>
+        <a routerLink="/cars" routerLinkActive="active">Listings</a>
+      </li>
+      <li>
+        <a routerLink="/add-car" routerLinkActive="active">Add Car</a>
+      </li>
+      <li>
+        <a routerLink="/edit-car" routerLinkActive="active">Edit Car</a>
+      </li>
+      <li>
+        <a routerLink="/about" routerLinkActive="active">About</a>
+      </li>
+    </ul>
+  </div>
+</nav>
